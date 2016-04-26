@@ -2,9 +2,14 @@
   "name": "electron-quick-start",
   "version": "1.0.0",
   "description": "A minimal Electron application",
-  "main": "main.js",
+  "main": "app/main.js",
   "scripts": {
-    "start": "electron main.js"
+    "electron": "electron main.js",
+    "webpack": "set NODE_ENV=production && webpack --progress --colors",
+    "webpack analyzer": "webpack --progress --json | webpack-bundle-size-analyzer",
+    "webpack-dev": "webpack-dev-server --content-base app/ --inline --progress --colors",
+    "electron-main-dev": "nodemon -w app/es6-main.js -x \"babel app/es6-main.js --out-file app/main.js && electron app/main.js",
+    "electron-dev": "start npm run webpack-dev && npm run electron-main-dev"
   },
   "repository": {
     "type": "git",
@@ -22,7 +27,24 @@
     "url": "https://github.com/electron/electron-quick-start/issues"
   },
   "homepage": "https://github.com/electron/electron-quick-start#readme",
+  "dependencies": {
+    "mobx": "^2.0.0",
+    "mobx-react": "^3.0.3",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1"
+  },
   "devDependencies": {
-    "electron-prebuilt": "^0.37.0"
+    "babel-cli": "^6.7.7",
+    "babel-core": "^6.5.1",
+    "babel-eslint": "^6.0.2",
+    "babel-loader": "^6.2.2",
+    "babel-plugin-react-html-attrs": "^2.0.0",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-2": "^6.5.0",
+    "electron-prebuilt": "^0.37.0",
+    "electron-reload": "^0.3.0",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
   }
 }
